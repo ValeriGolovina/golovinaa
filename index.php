@@ -5,4 +5,4 @@ $a=5;
 //die('break');
 echo 'Hello PHP!';
 define('Pi' , 3.14  );
-print Pi;
+//print Pi;
