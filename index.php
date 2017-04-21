@@ -1,6 +1,5 @@
-<b>Hi</b>
 <?php
-$a=5;
+/*$a=5;
 //var_dump($a);
 //die('break');
 
@@ -48,7 +47,16 @@ do {echo 'Hi!'; break;} while(false);
 
 //Lesson 4
 //суперглобальные переменные _$GET
-var_dump ($_GET);
-var_dump ($_POST);
-var_dump ($_SERVER);
+//var_dump ($_GET);
+//var_dump ($_POST);
+//var_dump ($_SERVER);
+*/
+//Lesson 5
+//ООП
+require_once 'src/GreetingHelper.php';
+$helper = new GreetingHelper('Hello');
 
+//print $helper-> getMessage();
+print $helper-> sayHello('Lera');
+$helper1 = new GreetingHelper('Hi');
+print $helper1-> sayHello('guest');
