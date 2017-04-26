@@ -53,10 +53,32 @@ do {echo 'Hi!'; break;} while(false);
 */
 //Lesson 5
 //ООП
-require_once 'src/GreetingHelper.php';
+/*require_once 'src/GreetingHelper.php';
 $helper = new GreetingHelper('Hello');
 
-//print $helper-> getMessage();
+print $helper-> getMessage();
 print $helper-> sayHello('Lera');
+$helper1 = new GreetingHelper('Hi');
+print $helper1-> sayHello('guest');
+
+require_once 'src/Member.php';
+echo "<br>";
+$member = new Member;
+$member->username = "Lera ";
+echo $member->username."is ". ($member->isLoggedIn() ? " logged in". "<br>": " logged out". "<br>");
+$member->login();
+echo $member->username."is ". ($member->isLoggedIn() ? " logged in". "<br>": " logged out". "<br>");
+$member->logout();
+echo $member->username."is ". ($member->isLoggedIn() ? " logged in". "<br>": " logged out". "<br>");*/
+
+//Lesson 6
+//namespace-указываем путь к классу(классы с одинаковым названием в разных папках)
+use Helper\GreetingHelper;
+
+require_once 'src/Helper/GreetingHelper.php';
+$helper = new GreetingHelper('Hello ');
+print $helper-> getMessage();
+print $helper-> sayHello('Lera');
+echo "<br>";
 $helper1 = new GreetingHelper('Hi');
 print $helper1-> sayHello('guest');
