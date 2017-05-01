@@ -111,15 +111,38 @@ echo ($user->isMoving() ? $user->Moving()."<br>": $user->notMoving(). "<br>");*/
 require  __DIR__.'/vendor/autoload.php'; //подключили автозагрузчик
 $app = new Silex\Application();
 $app ['debug'] = true;
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(       //регистрируем твиг
+    'twig.path' => __DIR__.'/views',
+));
+//Регистрируем роуты
 $app->get('/', function () use ($app) {  //function ()-анонимная функция use ($app)- способ передачи переменных
-    return 'Blog ';
+    /** @var Twig_Environment $twig */
+    $twig = $app['twig'];
+    return $twig->render('blog.twig');
 });
 $app->get('/blog/{id}', function ($id) use ($app) {
-    return 'Hello '.$app->escape($id);
+    /** @var Twig_Environment $twig */
+    $twig = $app['twig'];
+    return $twig->render('blog-post.twig', [
+        'postId'=>$id,
+    ]);
 });
 
 
 $app->run(); //создали приложение с помощью сайлекса
 
+
+//Tanya
+/*require_once __DIR__.'/src/Car/CarInterface.php';
+require_once __DIR__.'/src/Car/AbstractCar.php';
+require_once __DIR__.'/src/Car/Honda.php';*/
+
+
+
+$hondacar = new \Car\Honda(200);
+print $hondacar-> getName('Honda 8c');
+print $hondacar-> getSpeedType();
+//Не удаляй плиз, я все сама уберу
 
 
