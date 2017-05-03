@@ -115,19 +115,21 @@ $app ['debug'] = true;
 $app->register(new Silex\Provider\TwigServiceProvider(), array(       //регистрируем твиг
     'twig.path' => __DIR__.'/views',
 ));
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(    //учим доктрину подключаться к бд
+    'db.options' => array(
+        'driver'   => 'pdo_mysql',
+        'dbname' => 'silex_blog',
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => 'usbw',
+        'port' => 3307,
+
+    ),
+));
+
 //Регистрируем роуты
-$app->get('/', function () use ($app) {  //function ()-анонимная функция use ($app)- способ передачи переменных
-    /** @var Twig_Environment $twig */
-    $twig = $app['twig'];
-    return $twig->render('blog.twig');
-});
-$app->get('/blog/{id}', function ($id) use ($app) {
-    /** @var Twig_Environment $twig */
-    $twig = $app['twig'];
-    return $twig->render('blog-post.twig', [
-        'postId'=>$id,
-    ]);
-});
+$app->get('/', '\\Controller\\BlogController::indexAction');
+$app->get('/blog/{id}', '\\Controller\\BlogController::showPostAction' );
 
 
 $app->run(); //создали приложение с помощью сайлекса
