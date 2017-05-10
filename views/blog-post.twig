@@ -1,4 +1,6 @@
 {% extends 'base.twig' %}  {#наследование шаблонов#}
 {% block content %}
-    <h1> {{ post.title }}</h1> {#выводим название статьи#}
+   <h1> {{ post.title }}</h1><br> {#выводим название статьи#}
+   <p>{{ post.content }}</p> <br>
+    <a href="{{ path('delete_post', {id: post.id}) }}">Удалить</a>
 {% endblock %}

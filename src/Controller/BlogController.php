@@ -18,7 +18,15 @@ class BlogController
 
         /** @var \Twig_Environment $twig */
         $twig = $app['twig'];
-        return $twig->render('blog.twig');
+        /** @var Connection $conn */
+        $conn = $app['db'];
+        $sql = "SELECT * FROM posts";
+        $posts = $conn->fetchAll($sql);
+
+            return $twig->render('blog.twig', [
+                'posts'=>$posts, //массив постов
+            ]);
+
     }
     public function showPostAction(Application $app, $id)
     {
@@ -26,8 +34,10 @@ class BlogController
     $twig = $app['twig'];
     /** @var Connection $conn */
     $conn = $app['db'];
-     $sql = "SELECT * FROM posts WHERE id = $id";
-     $post = $app['db']->fetchAssoc($sql);
+     $sql = "SELECT * FROM posts WHERE id =:post_id";
+     $post = $app['db']->fetchAssoc($sql,[
+         'post_id'=>$id,
+     ]);
 
     return $twig->render('blog-post.twig', [
         'post'=>$post,  //передаем массив в шаблон

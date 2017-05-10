@@ -127,10 +127,12 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(    //учи�
     ),
 ));
 
-//Регистрируем роуты
-$app->get('/', '\\Controller\\BlogController::indexAction');
-$app->get('/blog/{id}', '\\Controller\\BlogController::showPostAction' );
+$app->register(new \Silex\Provider\UrlGeneratorServiceProvider()); //регистрируем унции path , url
 
+//Регистрируем роуты
+$app->get('/', '\\Controller\\BlogController::indexAction')->bind('homepage');
+$app->get('/blog/{id}', '\\Controller\\BlogController::showPostAction' )->bind('show_post');
+$app->get('/admin/blog/{id}/delete', '\\Controller\\AdminBlogController::deletePostAction' )->bind('delete_post');
 
 $app->run(); //создали приложение с помощью сайлекса
 
@@ -142,9 +144,10 @@ require_once __DIR__.'/src/Car/Honda.php';*/
 
 
 
-$hondacar = new \Car\Honda(200);
+
+/*$hondacar = new \Car\Honda(200);
 print $hondacar-> getName('Honda 8c');
 print $hondacar-> getSpeedType();
-//Не удаляй плиз, я все сама уберу
+//Не удаляй плиз, я все сама уберу*/
 
 
